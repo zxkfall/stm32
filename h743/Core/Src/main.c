@@ -16,10 +16,11 @@
   ******************************************************************************
   */
 #include <stdio.h>
-#include "bmp280.h"
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "bmp/bmp280.h"
+#include "OLED/ssd1306.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -44,6 +45,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 I2C_HandleTypeDef hi2c1;
+I2C_HandleTypeDef hi2c2;
 
 /* USER CODE BEGIN PV */
 
@@ -53,6 +55,7 @@ I2C_HandleTypeDef hi2c1;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
+static void MX_I2C2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -60,6 +63,19 @@ static void MX_I2C1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void OLED_Write(uint8_t x, uint8_t y, char * text){
+    ssd1306_SetCursor(x, y);
+    ssd1306_WriteString(text, Font_11x18, White);
+}
+
+void OLED_Show(float value, char *prefix, char *unit) {
+    ssd1306_Fill(Black);
+    OLED_Write(1, 5, prefix);
+    uint8_t *tempText[256];
+    sprintf((char *)tempText, "%.2f %s", value, unit);
+    OLED_Write(1, 25, (char *) tempText);
+    ssd1306_UpdateScreen();
+}
 /* USER CODE END 0 */
 
 /**
@@ -91,8 +107,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C1_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
-    uint16_t size;
     uint8_t Data[256];
     BMP280_HandleTypedef bmp280;
 
@@ -105,7 +121,14 @@ int main(void)
         HAL_Delay(2000);
     }
     bool bme280p = bmp280.id == BME280_CHIP_ID;
-    size = sprintf((char *)Data, "BMP280: found %s\n", bme280p ? "BME280" : "BMP280");
+    sprintf((char *)Data, "BMP280: found %s", bme280p ? "BME280" : "BMP280");
+
+    ssd1306_Init();
+    ssd1306_Fill(White);
+    ssd1306_SetCursor(0, 0);
+    ssd1306_WriteString_auto_newline(Data, Font_11x18, Black);
+    ssd1306_UpdateScreen();
+    HAL_Delay(2000);
 
   /* USER CODE END 2 */
 
@@ -122,23 +145,24 @@ int main(void)
       HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
       HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);
       HAL_Delay(1500);
-
+      ssd1306_Fill(Black);
       HAL_Delay(100);
       while (!bmp280_read_float(&bmp280, &temperature, &pressure, &humidity)) {
-
-          size = sprintf((char *)Data,
-                         "Temperature/pressure reading failed\n");
+          sprintf((char *)Data, "Temperature/pressure reading failed\n");
           HAL_Delay(2000);
       }
 
-      size = sprintf((char *)Data,"Pressure: %.2f Pa, Temperature: %.2f C",
-                     pressure, temperature);
+      OLED_Show(pressure, "Pressure:", "Pa");
+      HAL_Delay(1000);
+      OLED_Show(temperature, "Temperature:", "C");
+      HAL_Delay(1000);
       if (bme280p) {
-          size = sprintf((char *)Data,", Humidity: %.2f\n", humidity);
+          OLED_Show(humidity, "Humidity:", "");
+          HAL_Delay(1000);
       }
 
       else {
-          size = sprintf((char *)Data, "\n");
+          sprintf((char *)Data, "\n");
       }
       HAL_Delay(2000);
 
@@ -245,6 +269,54 @@ static void MX_I2C1_Init(void)
 }
 
 /**
+  * @brief I2C2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C2_Init(void)
+{
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.Timing = 0x00707CBB;
+  hi2c2.Init.OwnAddress1 = 240;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c2, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c2, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -257,8 +329,8 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
