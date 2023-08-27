@@ -99,11 +99,6 @@
     </key>
   </component>
   <component name="RunManager" selected="OpenOCD Download &amp; Run.OCD h743">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="h743.elf" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="h743" TARGET_NAME="h743.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="h743" RUN_TARGET_NAME="h743.elf">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -138,7 +133,13 @@
       <workItem from="1692628038829" duration="1691000" />
       <workItem from="1692629759628" duration="22418000" />
       <workItem from="1693033984316" duration="5432000" />
-      <workItem from="1693039491428" duration="17885000" />
+      <workItem from="1693039491428" duration="20689000" />
+      <workItem from="1693137744260" duration="1000" />
+      <workItem from="1693137789205" duration="2510000" />
+      <workItem from="1693140601992" duration="8616000" />
+      <workItem from="1693151007246" duration="1000" />
+      <workItem from="1693151054694" duration="1000" />
+      <workItem from="1693152009922" duration="1987000" />
     </task>
     <task id="LOCAL-00001" summary="init rep">
       <option name="closed" value="true" />
@@ -179,27 +180,32 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <condition expression="USART_RX_BUF[2] != 'G'" language="ObjectiveC" />
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>141</line>
-          <option name="timeStamp" value="8" />
+          <line>214</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>142</line>
-          <option name="timeStamp" value="9" />
+          <line>207</line>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>136</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>83</line>
-          <option name="timeStamp" value="43" />
+          <url>file://$PROJECT_DIR$/Core/Src/stm32h7xx_it.c</url>
+          <line>224</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="com.jetbrains.cidr.embedded.openocd.conf.type">
+        <watch expression="(char *) buf" language="ObjectiveC" />
+        <watch expression="(char *) Buffer" language="ObjectiveC" />
+        <watch expression="(uint8_t *)tmp" language="ObjectiveC" />
+        <watch expression="(char *)Buffer" language="ObjectiveC" />
+        <watch expression="(char *) USART_RX_BUF" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
