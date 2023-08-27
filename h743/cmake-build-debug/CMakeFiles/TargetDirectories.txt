@@ -1,3 +1,0 @@
-E:/codespace/stm32/h743/cmake-build-debug/CMakeFiles/h743.elf.dir
-E:/codespace/stm32/h743/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/codespace/stm32/h743/cmake-build-debug/CMakeFiles/rebuild_cache.dir
