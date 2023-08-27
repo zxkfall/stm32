@@ -26,7 +26,8 @@
 
 /**
  * Mode of BMP280 module operation.
- * Forced - Measurement is initiated by user.
+ * Sleep - No measurements are performed, all registers accessible, lowest power mode
+ * Forced - Measurement is initiated by user, only measure once then back to sleep.
  * Normal - Continues measurement.
  */
 typedef enum {
