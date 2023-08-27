@@ -21,16 +21,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5e18853-d94a-4c9c-a2cd-3de111b2a69b" name="Changes" comment="init rep">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/OLED/bmp.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/oled/bmp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/OLED/fonts.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/oled/fonts.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/OLED/fonts.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/oled/fonts.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/OLED/oledfont.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/oled/oledfont.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/OLED/ssd1306.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/oled/ssd1306.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/OLED/ssd1306.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/oled/ssd1306.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/Src/bmp/bmp280.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/bmp/bmp280.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mxproject" beforeDir="false" afterPath="$PROJECT_DIR$/.mxproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32h7xx_hal_conf.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32h7xx_hal_conf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Inc/stm32h7xx_it.h" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Inc/stm32h7xx_it.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/Src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32h7xx_hal_msp.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32h7xx_hal_msp.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Src/stm32h7xx_it.c" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Src/stm32h7xx_it.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/h743.ioc" beforeDir="false" afterPath="$PROJECT_DIR$/h743.ioc" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +138,7 @@
       <workItem from="1692628038829" duration="1691000" />
       <workItem from="1692629759628" duration="22418000" />
       <workItem from="1693033984316" duration="5432000" />
-      <workItem from="1693039491428" duration="8597000" />
+      <workItem from="1693039491428" duration="17885000" />
     </task>
     <task id="LOCAL-00001" summary="init rep">
       <option name="closed" value="true" />
@@ -182,38 +180,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>148</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>121</line>
+          <line>141</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>122</line>
+          <line>142</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
-          <line>116</line>
+          <line>136</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/oled/ssd1306.c</url>
-          <line>214</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/oled/ssd1306.c</url>
-          <line>221</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Core/Src/oled/ssd1306.c</url>
-          <line>215</line>
-          <option name="timeStamp" value="18" />
+          <url>file://$PROJECT_DIR$/Core/Src/main.c</url>
+          <line>83</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
