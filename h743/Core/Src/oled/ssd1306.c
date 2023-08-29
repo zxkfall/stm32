@@ -215,7 +215,7 @@ char ssd1306_WriteString_auto_newline(char* str, FontDef Font, SSD1306_COLOR col
         if (SSD1306.CurrentX + Font.FontWidth >= SSD1306_WIDTH){
             i++;
             SSD1306.CurrentX = 0;
-            SSD1306.CurrentY = SSD1306.CurrentY + Font.FontHeight * i;
+            SSD1306.CurrentY = SSD1306.CurrentY + Font.FontHeight * i + 1;
 
         }
 		// Next char

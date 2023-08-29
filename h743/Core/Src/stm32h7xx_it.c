@@ -58,9 +58,6 @@
 extern TIM_HandleTypeDef htim6;
 extern UART_HandleTypeDef huart5;
 /* USER CODE BEGIN EV */
-
-#define RXBUFFERSIZE   1 //缓存大小
-extern uint8_t aRxBuffer[RXBUFFERSIZE];//HAL库USART接收Buffer
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -207,26 +204,11 @@ void SysTick_Handler(void)
 void UART5_IRQHandler(void)
 {
   /* USER CODE BEGIN UART5_IRQn 0 */
-    uint32_t timeout=0;
-    uint32_t maxDelay=0x1FFFF;
+
   /* USER CODE END UART5_IRQn 0 */
   HAL_UART_IRQHandler(&huart5);
   /* USER CODE BEGIN UART5_IRQn 1 */
 
-
-    timeout=0;
-    while (HAL_UART_GetState(&huart5)!=HAL_UART_STATE_READY)//等待就绪
-    {
-        timeout++;////超时处理
-        if(timeout>maxDelay) break;
-    }
-
-    timeout=0;
-    while(HAL_UART_Receive_IT(&huart5,(uint8_t *)aRxBuffer, RXBUFFERSIZE)!=HAL_OK)//一次处理完成之后，重新开启中断并设置RxXferCount为1
-    {
-        timeout++; //超时处理
-        if(timeout>maxDelay) break;
-    }
   /* USER CODE END UART5_IRQn 1 */
 }
 
