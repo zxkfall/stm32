@@ -191,16 +191,18 @@ void processData(void) {
 //    $GPGSV,3,2,09,16,36,053,,21,25,163,,26,15,077,,27,60,039,*7C
 //    $GPGSV,3,3,09,31,15,129,11*4C
     struct GPS_INFO gnrmc = GET_GPS_INFO("$GNRMC");
-    struct GPS_INFO gnzda = GET_GPS_INFO("$GNZDA");
     struct GPS_INFO gnvtg = GET_GPS_INFO("$GNVTG");
+    struct GPS_INFO gnzda = GET_GPS_INFO("$GNZDA");
+    struct GPS_INFO gptxt = GET_GPS_INFO("$GPTXT");
     struct GPS_INFO gngga = GET_GPS_INFO("$GNGGA");
     struct GPS_INFO gngll = GET_GPS_INFO("$GNGLL");
+    struct GPS_INFO gpgsa = GET_GPS_INFO("$GPGSA");
+    struct GPS_INFO bdgsa = GET_GPS_INFO("$BDGSA");
+    struct GPS_INFO gpgsv = GET_GPS_INFO("$GPGSV");
+
     struct GPS_INFO gngsa = GET_GPS_INFO("$GNGSA");
     struct GPS_INFO gngbs = GET_GPS_INFO("$GNGBS");
     struct GPS_INFO gngns = GET_GPS_INFO("$GNGNS");
-
-    struct GPS_INFO gpgsv = GET_GPS_INFO("$GPGSV");
-    struct GPS_INFO gptxt = GET_GPS_INFO("$GPTXT");
     struct GPS_INFO gpgga = GET_GPS_INFO("$GPGGA");
 
     struct GPS_INFO bdgsv = GET_GPS_INFO("$BDGSV");
@@ -211,19 +213,6 @@ void processData(void) {
 
     struct GPS_INFO glgsv = GET_GPS_INFO("$GLGSV");
 
-
-
-//    size_t ggaL = gga.data == NULL || gga.data[0] == '\0' ? 0 : strlen((char *)gga.data);
-//    size_t gsvL = gsv.data == NULL || gsv.data[0] == '\0' ? 0 : strlen((char *)gsv.data);
-//    size_t txtL = txt.data == NULL || txt.data[0] == '\0' ? 0 : strlen((char *)txt.data);
-
-//    size_t ggaL = (gga.data == NULL) ? 0 : sizeof(gga.data);
-//    size_t gsvL = (gsv.data == NULL) ? 0 : sizeof(gsv.data);
-//    size_t txtL = (txt.data == NULL) ? 0 : sizeof(txt.data);
-//    char * res[ggaL + gsvL + txtL + 1];
-//    strcpy((char *) res, gga.data == NULL ? "" : (char *)gga.data);
-//    strcat((char *) res, gsv.data == NULL ? "" : (char *)gsv.data);
-//    strcat((char *) res, txt.data == NULL ? "" : (char *)txt.data);
 
     size_t gnggaL = (gngga.data == NULL) ? 0 : strlen((char *) gngga.data);
     size_t gpgsvL = (gpgsv.data == NULL) ? 0 : strlen((char *) gpgsv.data);
@@ -240,9 +229,13 @@ void processData(void) {
     size_t gngsaL = (gngsa.data == NULL) ? 0 : strlen((char *) gngsa.data);
     size_t gngbsL = (gngbs.data == NULL) ? 0 : strlen((char *) gngbs.data);
     size_t gngnsL = (gngns.data == NULL) ? 0 : strlen((char *) gngns.data);
+    size_t gpgsaL = (gpgsa.data == NULL) ? 0 : strlen((char *) gpgsa.data);
+    size_t bdgsaL = (bdgsa.data == NULL) ? 0 : strlen((char *) bdgsa.data);
+
     size_t totalLength =
             gnggaL + gpgsvL + gptxtL + gpggaL + bdgsvL + bdggaL + qzgsvL + gagsvL + glgsvL + gnzdaL + gnvtgL + gngllL +
-            gngsaL + gngbsL + gngnsL;
+            gngsaL + gngbsL + gngnsL + gpgsaL + bdgsaL;
+
     char *res = (char *) malloc(totalLength + 1); // Allocate memory for concatenated string
     res[0] = '\0'; // Initialize the concatenated string as an empty string
 
@@ -261,6 +254,8 @@ void processData(void) {
     if (gngsa.data != NULL) strcat(res, (char *) gngsa.data);
     if (gngbs.data != NULL) strcat(res, (char *) gngbs.data);
     if (gngns.data != NULL) strcat(res, (char *) gngns.data);
+    if (gpgsa.data != NULL) strcat(res, (char *) gpgsa.data);
+    if (bdgsa.data != NULL) strcat(res, (char *) bdgsa.data);
 
     if (res != NULL && strlen(res) != 0) {
 
